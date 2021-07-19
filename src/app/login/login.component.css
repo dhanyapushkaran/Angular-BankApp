@@ -1,0 +1,15 @@
+.log {
+            
+    border: 1px solid black;
+    width: 270px;
+    height: 300px;
+    margin-top: 50px;
+    border-radius: 5%;
+    background-color: rgb(51, 48, 48);
+    padding-top: 5px;
+    color: white;
+    
+}
+body{
+    background-color:tomato ;
+}

@@ -23,17 +23,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  fetchAcc(event:any){
-    this.acno= event.target.value
-  }
 
-  fetchpswd(event:any){
-    this.pswd= event.target.value
-  }
-
-  authentication(){
-    var acno=this.acno;
-    var pswd=this.pswd;
+  authentication(a:any,p:any){
+    var acno=a.value
+    var pswd=p.value
     let accDetails= this.users;
     if(acno in accDetails){
       if(pswd == accDetails[acno]["password"]){
@@ -48,3 +41,29 @@ export class LoginComponent implements OnInit {
     }
   }
 }
+
+  // fetchAcc(event:any){
+  //   this.acno= event.target.value
+  // }
+
+  // fetchpswd(event:any){
+  //   this.pswd= event.target.value
+  // }
+
+//   authentication(){
+//     var acno=this.acno;
+//     var pswd=this.pswd;
+//     let accDetails= this.users;
+//     if(acno in accDetails){
+//       if(pswd == accDetails[acno]["password"]){
+//         alert("successfully loged in")
+//       }
+//       else{
+//         alert("invalid passord")
+//       }
+//     }
+//     else{
+//       alert(" inavlid account details")
+//     }
+//   }
+// }

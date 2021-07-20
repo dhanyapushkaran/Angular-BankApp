@@ -9,15 +9,15 @@
             <div style="padding-top: 20px;padding-left: 20px; ">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label" >Account Number</label>
-                    <input type="text" class="form-control" (change)="fetchAcc($event)" [value]="acNum" style="width:200px; border-color: black;" id="acNo">
+                    <input type="text" class="form-control" #acNo [value]="acNum" style="width:200px; border-color: black;" id="acNo">
                     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" (change)="fetchpswd($event)" id="pwd" style="width:200px ; border-color: black;">
+                    <input type="password" class="form-control" #pswd id="pwd" style="width:200px ; border-color: black;">
                 </div>
   
-                <button type="submit" class="btn btn-secondary" (click)="authentication()">Submit</button>
+                <button type="submit" class="btn btn-secondary" (click)="authentication(acNo,pswd)">Submit</button>
   
                 <p id="error" style="color: red;"></p>
             </div>

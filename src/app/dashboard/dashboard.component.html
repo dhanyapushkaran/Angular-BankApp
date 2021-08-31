@@ -1,0 +1,195 @@
+<nav class="navbar navbar-expand=lg" style="background-color: rgb(19, 18, 18);">
+    <h4 style="color: white; margin-left: 100px;">Welcome {{userName}} to Net Banking</h4>
+    <a (click)= "logout()" routerLink="/" >Logout</a>
+</nav>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-5">
+            <img src="assets/4636951.jpg" alt="">
+
+        </div>
+
+        <div class="col-lg-3 " style="margin-left: 130px; padding-top: 70px;">
+            <mat-tab-group class="nav nav-tabs">
+                <mat-tab class="nav-item">
+                    <ng-template mat-tab-label>
+                        <h4>Deposit</h4>
+
+                    </ng-template>
+                    <form [formGroup]="depositForm" (ngSubmit)="deposit()">
+                        <div style="padding-top: 20px;padding-left: 20px; ">
+                            <div class="mb-3">
+
+                                <label for="exampleInputEmail1" class="form-label">Account Number</label>
+                                <input type="text" class="form-control w-100" name="acno" formControlName="acno"
+                                    style="width:200px; border-color: black;" id="acNo">
+                                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                            </div>
+                            <div *ngIf="(this.depositForm.get('acno')?.touched || this.depositForm.get('acno')?.dirty) && this.depositForm.get('acno')?.errors"
+                                class="errors">invalid Account number</div>
+
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" class="form-control w-100" name="pswd" id="pswd" formControlName="pswd"
+                                    style="width:200px ; border-color: black;">
+                            </div>
+                            <div *ngIf="(this.depositForm.get('pswd')?.touched || this.depositForm.get('pswd')?.dirty) && this.depositForm.get('pswd')?.errors"
+                                class="errors">invalid password</div>
+
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label w-100">Deposit Amount</label>
+                                <input type="text" class="form-control w-100" name="amount" formControlName="amount"
+                                    style="width:200px; border-color: black;" id="name">
+                                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                            </div>
+                            <div *ngIf="(this.depositForm.get('amount')?.touched || this.depositForm.get('amount')?.dirty) && this.depositForm.get('amount')?.errors"
+                                class="errors">invalid Amount</div>
+
+                            <button type="submit" class="btn btn-secondary">Submit</button>
+
+                            <p id="error" style="color: red;"></p>
+                        </div>
+                    </form> 
+                </mat-tab>
+
+                <mat-tab class="nav-item">
+                    <ng-template mat-tab-label>
+                        <h4>Withdraw</h4>
+
+                    </ng-template>
+                    <form [formGroup]="withdrawForm" (ngSubmit)="withdraw()">
+                        <div style="padding-top: 20px;padding-left: 20px; ">
+                            <div class="mb-3">
+
+                                <label for="exampleInputEmail1" class="form-label">Account Number</label>
+                                <input type="text" class="form-control w-100" name="acno1" formControlName="acno1"
+                                    style="width:200px; border-color: black;" id="acNo1">
+                                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                            </div>
+                            <div *ngIf="(this.withdrawForm.get('acno1')?.touched || this.withdrawForm.get('acno1')?.dirty) && this.withdrawForm.get('acno1')?.errors"
+                                class="errors">invalid Account number</div>
+
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" class="form-control w-100" name="pswd1" id="pswd1"
+                                    formControlName="pswd1" style="width:200px ; border-color: black;">
+                            </div>
+                            <div *ngIf="(this.withdrawForm.get('pswd1')?.touched || this.withdrawForm.get('pswd1')?.dirty) && this.withdrawForm.get('pswd1')?.errors"
+                                class="errors">invalid password</div>
+
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">withdraw Amount</label>
+                                <input type="text" class="form-control w-100" name="amount1" formControlName="amount1"
+                                    style="width:200px; border-color: black;" id="name1">
+                                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                            </div>
+                            <div *ngIf="(this.withdrawForm.get('amount1')?.touched || this.withdrawForm.get('amount1')?.dirty) && this.withdrawForm.get('amount1')?.errors"
+                                class="errors">invalid Amount</div>
+
+
+                            <button type="submit" class="btn btn-secondary">Submit</button>
+
+                            <p id="error" style="color: red;"></p>
+                        </div>
+                    </form>
+                </mat-tab>
+
+                <mat-tab class="nav-item">
+                    <ng-template mat-tab-label>
+                        <h4>Transactions</h4>
+
+                    </ng-template>
+                    <div class="col-lg-3" style="padding-top: 80px; ">
+                        <a routerLink="/transaction"
+                            style="font-weight: bolder; font-size: 18px; text-decoration: none; color: black;">
+                            TransactionHistory</a>
+                    </div>
+                </mat-tab>
+
+            </mat-tab-group>
+
+  
+  
+        </div>
+        <app-delete (onDelete)="deletefromParent($event)" (onCancel)="cancel()" [item]="acno"></app-delete>
+        <button style="width: 50%;"  (click)="delete()" class="btn btn-danger ms-auto">Delete account</button>
+
+
+    </div>
+
+</div>
+<!-- <div class="col-lg-6 log" style="margin-left: 50px; padding-top: 30px;"> -->
+
+<!-- <h5 style="text-align: center;">Deposit Form</h5> -->
+<!-- <form [formGroup]="depositForm" (ngSubmit)="deposit()">
+                <div style="padding-top: 20px;padding-left: 20px; ">
+                    <div class="mb-3">
+
+                        <label for="exampleInputEmail1" class="form-label">Account Number</label>
+                        <input type="text" class="form-control" name="acno" formControlName="acno"
+                            style="width:200px; border-color: black;" id="acNo">
+                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+<!-- </div>
+                    <div *ngIf="(this.depositForm.get('acno')?.touched || this.depositForm.get('acno')?.dirty) && this.depositForm.get('acno')?.errors" class="errors">invalid Account number</div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="pswd" id="pswd" formControlName="pswd"
+                            style="width:200px ; border-color: black;">
+                    </div>
+                    <div *ngIf="(this.depositForm.get('pswd')?.touched || this.depositForm.get('pswd')?.dirty) && this.depositForm.get('pswd')?.errors" class="errors">invalid password</div> -->
+
+<!-- <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Deposit Amount</label>
+                        <input type="text" class="form-control" name="amount" formControlName="amount"
+                            style="width:200px; border-color: black;" id="name">
+                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+<!-- </div>
+                    <div *ngIf="(this.depositForm.get('amount')?.touched || this.depositForm.get('amount')?.dirty) && this.depositForm.get('amount')?.errors" class="errors">invalid Amount</div>
+
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+
+                    <p id="error" style="color: red;"></p>
+                </div>
+            </form>  -->
+<!-- </div> -->
+<!-- <div class="col-lg-6 log" style="margin-left: 100px;  padding-top: 30px;">
+            <h5 style="text-align: center;">Withdrawel Form</h5>
+            <form [formGroup]="withdrawForm" (ngSubmit)="withdraw()">
+                <div style="padding-top: 20px;padding-left: 20px; ">
+                    <div class="mb-3">
+
+                        <label for="exampleInputEmail1" class="form-label">Account Number</label>
+                        <input type="text" class="form-control" name="acno1" formControlName="acno1"
+                            style="width:200px; border-color: black;" id="acNo1">
+                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+<!-- </div>
+                    <div *ngIf="(this.withdrawForm.get('acno1')?.touched || this.withdrawForm.get('acno1')?.dirty) && this.withdrawForm.get('acno1')?.errors" class="errors">invalid Account number</div>
+             
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="pswd1" id="pswd1" formControlName="pswd1"
+                            style="width:200px ; border-color: black;">
+                    </div>
+                    <div *ngIf="(this.withdrawForm.get('pswd1')?.touched || this.withdrawForm.get('pswd1')?.dirty) && this.withdrawForm.get('pswd1')?.errors" class="errors">invalid password</div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">withdraw Amount</label>
+                        <input type="text" class="form-control" name="amount1" formControlName="amount1"
+                            style="width:200px; border-color: black;" id="name1">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+<!-- </div>
+                    <div *ngIf="(this.withdrawForm.get('amount1')?.touched || this.withdrawForm.get('amount1')?.dirty) && this.withdrawForm.get('amount1')?.errors" class="errors">invalid Amount</div>
+
+
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+
+                    <p id="error" style="color: red;"></p>
+                </div>
+            </form> -->
+<!-- </div> -->
+
+<!-- </div> -->

@@ -2,11 +2,12 @@
             
     border: 1px solid black;
     width: 270px;
-    height: 350px;
-    margin-top: 100px;
+    height: 450px;
+    margin-top: 50px;
     border-radius: 5%;
     background-color: rgb(51, 48, 48);
-       color: white;
+    padding-top: 5px;
+    color: white;
     
 }
 

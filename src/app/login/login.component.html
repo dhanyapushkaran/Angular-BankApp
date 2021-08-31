@@ -1,27 +1,37 @@
+<nav class="navbar navbar-expand=lg" style="background-color: rgb(19, 18, 18);">
+    <h4 style="color: white; margin-left: 100px;">{{aim}}</h4>
+    </nav>
 <div class="container">
     
     <div class="row">
-        <h5>{{aim}}</h5>
-        <div class="col-3"></div>
-        <div class="col-6 log" style="margin-left: 100px;">
-           
+        <!-- <h5 style="padding-left: 400px; margin-top: 20px; ">{{aim}}</h5> -->
+        <div class="col-lg-6">
+            <img src="assets/4636951.jpg" alt="" >
+        </div>
+        <div class="col-lg-6 log" style="margin-left: 100px;">
+           <form [formGroup]="loginForm" (ngSubmit)="authentication()">
             <h5 style="text-align: center;">Login Here</h5>
             <div style="padding-top: 20px;padding-left: 20px; ">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label" >Account Number</label>
-                    <input type="text" class="form-control" #acNo [value]="acNum" style="width:200px; border-color: black;" id="acNo">
+                    <input type="text" class="form-control" name="acno" formControlName="acno" style="width:200px; border-color: black;" id="acNo">
                     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
+                <div *ngIf="(this.loginForm.get('acno')?.touched || this.loginForm.get('acno')?.dirty) && this.loginForm.get('acno')?.errors" class="error">invalid account number</div>
+
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" #pswd id="pwd" style="width:200px ; border-color: black;">
+                    <input type="password" class="form-control" name="pswd"  formControlName="pswd" id="pwd" style="width:200px ; border-color: black;">
                 </div>
-  
-                <button type="submit" class="btn btn-secondary" (click)="authentication(acNo,pswd)">Submit</button>
+                <div *ngIf="(this.loginForm.get('pswd')?.touched || this.loginForm.get('pswd')?.dirty) && this.loginForm.get('pswd')?.errors" class="error">invalid password</div>
+
+                <button type="submit" class="btn btn-secondary" >Submit</button> &nbsp;&nbsp;
+                <button  type="submit" class="btn btn-secondary" routerLink="register" >Sign Up</button>
   
                 <p id="error" style="color: red;"></p>
             </div>
+        </form>
         </div>
-        <div class="col-3"></div>
+        
     </div>
   </div>

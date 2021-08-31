@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-login',
@@ -7,38 +10,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  aim="welcome to SBL Bank"
-  acNum="Account no please"
-  acno=""
-  pswd=""
-  
-  users:any={
-    1000: { acno:1000, username:"jio", password: "jio",balance: 5000},
-    1001: { acno:1001, username:"sam", password: "sam",balance: 4000},
-    1002: { acno:1002, username:"ram", password: "ram",balance: 6000},
-    1003: { acno:1003, username:"raju",password: "raju",balance: 7000},
-    1004: { acno:1004, username:"lio", password: "lio",balance: 9000}
-  }
-  constructor() { }
+  aim = "Welcome to Net Banking"
+  acno = "Account no please"
+  pswd = ""
+
+  loginForm = this.fb.group({
+    acno: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+    pswd: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]]
+  })
+
+  constructor(private router: Router, private ds: DataService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
-  authentication(a:any,p:any){
-    var acno=a.value
-    var pswd=p.value
-    let accDetails= this.users;
-    if(acno in accDetails){
-      if(pswd == accDetails[acno]["password"]){
-        alert("successfully loged in")
+  authentication() {
+    if (this.loginForm.valid) {
+      var acno = this.loginForm.value.acno
+      var pswd = this.loginForm.value.pswd
+     this.ds.authentication(acno, pswd)
+     .subscribe((result:any)=>{
+      if (result) {
+        console.log(result.message);
+        alert(result.message)
+        localStorage.setItem("userName", result.userName)
+        localStorage.setItem("currentAcc", result.currentAcc)
+        this.router.navigateByUrl("dashboard")
       }
-      else{
-        alert("invalid passord")
-      }
+     }, result=>{
+       console.log(result.error.message);
+       
+      alert(result.error.message )
+     })
+     
     }
-    else{
-      alert(" inavlid account details")
-    }
+   
   }
 }
 
